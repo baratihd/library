@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class PublisherModel(models.Model):
@@ -32,3 +36,14 @@ class BookModel(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+class BookCheckOutModel(models.Model):
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    user_checkout = models.ForeignKey(User, on_delete=models.CASCADE)
+    librarian = models.ForeignKey('accounts.LibrarianModel', on_delete=models.CASCADE)
+    check_out_datetime = models.DateTimeField(auto_now_add=True)
+    return_datetime = models.DateTimeField()
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.user_checkout.username, self.book.title)
