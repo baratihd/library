@@ -38,12 +38,12 @@ class BookModel(models.Model):
         return self.title
 
 
-# class BookCheckOutModel(models.Model):
-#     book = models.ForeignKey('Book', on_delete=models.CASCADE)
-#     user_checkout = models.ForeignKey(User, on_delete=models.CASCADE)
-#     librarian = models.ForeignKey('accounts.LibrarianModel', on_delete=models.CASCADE)
-#     check_out_datetime = models.DateTimeField(auto_now_add=True)
-#     return_datetime = models.DateTimeField()
+class BookCheckOutModel(models.Model):
+    book = models.ForeignKey('BookModel', on_delete=models.CASCADE)
+    user_checkout = models.ForeignKey(User, on_delete=models.CASCADE)
+    librarian = models.ForeignKey('accounts.LibrarianModel', on_delete=models.CASCADE)
+    check_out_datetime = models.DateTimeField(auto_now_add=True)
+    return_datetime = models.DateTimeField()
 
-#     def __unicode__(self):
-#         return u'%s - %s' % (self.user_checkout.username, self.book.title)
+    def __unicode__(self):
+        return u'%s - %s' % (self.user_checkout.username, self.book.title)
