@@ -1,9 +1,50 @@
-{% include 'index/base.html %}
+{% extends 'index/base.html' %}
 
 {% block content %}
 
-<div class="col">
-    <h1></h1>
+<br>
+<div class="container">
+  <form action="">
+    {{ form }}
+    <input class="btn btn-primary" type="submit" value="Search">
+  </form>
 </div>
 
+<br>
+<br>
+
+{% if books|length %}
+  <div class="container">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Category</th>
+          <th scope="col">Author</th>
+          <th scope="col">Publisher</th>
+          <th scope="col">Publication_date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+        <tr>
+          <th scope="row">{{ book.title }}</th>
+          <td>{% for cat in book.category.all %}{{cat.title}}, {% endfor %}</td>
+          <td>
+            {% for auth in book.authors.all %}
+              {{ auth.first_name }} {{ auth.last_name }},
+            {% endfor %}
+          </td>
+
+          <td>{{ book.publisher.name }}</td>
+          <td>{{ book.publication_date }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+</div>
+{% else %}
+  <div class="container">There isn't anything to show!</div>
+{% endif %}
 {% endblock content %}

@@ -10,7 +10,7 @@ class PublisherModel(models.Model):
     address = models.ForeignKey('index.AddressModel', on_delete=models.CASCADE)
     website = models.URLField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -19,12 +19,15 @@ class AuthorModel(models.Model):
     last_name = models.CharField(max_length=40)
     email = models.EmailField()
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s %s' % (self.first_name, self.last_name)
 
 
 class BookCategory(models.Model):
     title = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.title
 
 
 class BookModel(models.Model):
@@ -34,8 +37,18 @@ class BookModel(models.Model):
     publisher = models.ForeignKey('PublisherModel', on_delete=models.CASCADE)
     publication_date = models.DateField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
+
+    @property
+    def get_authors(self):
+        authors = self.authors.values_list('last_name', flat=True)
+        return ', '.join(authors)
+
+    @property
+    def get_categories(self):
+        categories = self.authors.values_list('title', flat=True)
+        return ', '.join(categories)
 
 
 class BookCheckOutModel(models.Model):
@@ -45,5 +58,5 @@ class BookCheckOutModel(models.Model):
     check_out_datetime = models.DateTimeField(auto_now_add=True)
     return_datetime = models.DateTimeField()
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s - %s' % (self.user_checkout.username, self.book.title)
