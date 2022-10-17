@@ -25,6 +25,7 @@ SECRET_KEY = '-ey+=es7vn953yq-z1)tb2&!g7my8!^=_2$tiau+__ymssc5j5'
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -40,11 +41,16 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third-party apps
+    'crispy_forms',
     # local apps
     'accounts.apps.AccountsConfig',
     'library.apps.LibraryConfig',
     'index.apps.IndexConfig',
 )
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
+
 
 MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',

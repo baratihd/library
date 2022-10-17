@@ -1,4 +1,4 @@
-{% extends 'index/navbar.html' %}
+{% extends 'index/base.html' %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
 	<h1>Register</h1>
 	<form method="POST">
 		{% csrf_token %}
-		{{ register_form|crispy }}
+		{{ form|crispy }}
 		<button class="btn btn-primary" type="submit">Register</button>
 	</form>
 	<p class="text-center">If you already have an account, <a href="{% url 'accounts:login' %}">login</a> instead.</p>
