@@ -1,0 +1,14 @@
+{% include 'index/base.html %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<div class="col">
+    <h1></h1>
+</div>
+{% else %}
+<div>Please signing in to access the list of books.</div>
+<div>Click <a href="{% url 'accounts:' %}">here</a> for login.</div>
+{% endif %}
+
+{% endblock content %}
