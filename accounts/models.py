@@ -6,6 +6,7 @@ from .utils import create_new_staff_number
 from .managers import UserManager
 
 
+# Create default custom user, we change fields
 class User(AbstractUser):
 
     objects = UserManager()
@@ -16,6 +17,7 @@ class User(AbstractUser):
         verbose_name_plural = _('users')
 
 
+# create librarian model for managing checkout books.
 class LibrarianModel(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     staff_code = models.CharField(

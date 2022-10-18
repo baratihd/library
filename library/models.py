@@ -42,6 +42,9 @@ class BookModel(models.Model):
 
 
 class BookCheckOutModel(models.Model):
+    """
+    This model save data of checkout books
+    """
     book = models.ForeignKey('BookModel', on_delete=models.CASCADE)
     user_checkout = models.ForeignKey(User, on_delete=models.CASCADE)
     librarian = models.ForeignKey('accounts.LibrarianModel', on_delete=models.CASCADE)

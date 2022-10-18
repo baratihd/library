@@ -5,6 +5,8 @@ from django.contrib.auth.models import Group
 from .models import LibrarianModel
 
 
+# Create signal for assigning staff to user
+# and add librarian group to user for
 @receiver(post_save, sender=LibrarianModel)
 def set_librarian_group(sender, instance, created, **kwargs):
     if created:
