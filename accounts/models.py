@@ -23,6 +23,9 @@ class LibrarianModel(models.Model):
     )
     address = models.ForeignKey('index.AddressModel', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.user.username}'
+
     def save(self, *args, **kwargs):
         is_created = not self.id
         if is_created:
