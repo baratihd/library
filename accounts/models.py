@@ -25,10 +25,3 @@ class LibrarianModel(models.Model):
 
     def __str__(self):
         return f'{self.user.username}'
-
-    def save(self, *args, **kwargs):
-        is_created = not self.id
-        if is_created:
-            self.user.is_staff = True
-            self.user.save()
-        return super().save(args, kwargs)
