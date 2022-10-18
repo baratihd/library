@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='bookcheckoutmodel',
             name='return_datetime',
-            field=models.DateTimeField(null=True),
+            field=models.DateTimeField(null=True, blank=True),
         ),
     ]

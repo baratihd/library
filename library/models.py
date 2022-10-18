@@ -46,7 +46,7 @@ class BookCheckOutModel(models.Model):
     user_checkout = models.ForeignKey(User, on_delete=models.CASCADE)
     librarian = models.ForeignKey('accounts.LibrarianModel', on_delete=models.CASCADE)
     check_out_datetime = models.DateTimeField(auto_now_add=True)
-    return_datetime = models.DateTimeField(null=True)
+    return_datetime = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return u'%s - %s' % (self.user_checkout.username, self.book.title)

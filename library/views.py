@@ -19,7 +19,10 @@ class BookListView(ListView):
         return context
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().filter(
+            Q(bookcheckoutmodel__isnull=True) |
+            Q(bookcheckoutmodel__return_datetime__isnull=False)
+        ).distinct()
         if 'search' in self.request.GET:
             self.form = self.form(self.request.GET)
             if self.form.is_valid():
@@ -29,7 +32,5 @@ class BookListView(ListView):
                     Q(category__title__icontains=cd) |
                     Q(authors__username__icontains=cd) |
                     Q(publisher__name__icontains=cd),
-                    bookcheckoutmodel__isnull=False,
-                    bookcheckoutmodel__return_datetime__isnull=True,
                 )
         return queryset
