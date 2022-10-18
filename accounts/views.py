@@ -4,12 +4,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.views.generic.edit import CreateView
 
-from .forms import UserCreationForm
+from .forms import RegisterUserForm
 
 
 class UserRegisterCreateView(SuccessMessageMixin, CreateView):
 	template_name = 'accounts/register.html'
-	form_class = UserCreationForm
+	form_class = RegisterUserForm
 	success_url = reverse_lazy('accounts:login')
 	success_message = "Your profile was created successfully"
 

@@ -1,9 +1,14 @@
-{% include 'index/base.html' %}
+{% extends 'index/base.html' %}
 
 {% block content %}
 
-<h1>Welcome</h1>
-<div>Please signing in to access the list of books.</div>
-<div>Click <a href="{% url 'accounts:login' %}">here</a> for login.</div>
+<din class="container">
+    <h1>Welcome</h1>
+
+    {% if not request.user.is_authenticated %}
+    <div>Please signing in to access the list of books.</div>
+    <div>Click <a href="{% url 'accounts:login' %}">here</a> for login.</div>
+    {% endif %}
+</din>
 
 {% endblock content %}
