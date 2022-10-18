@@ -40,16 +40,6 @@ class BookModel(models.Model):
     def __str__(self):
         return self.title
 
-    @property
-    def get_authors(self):
-        authors = self.authors.values_list('last_name', flat=True)
-        return ', '.join(authors)
-
-    @property
-    def get_categories(self):
-        categories = self.authors.values_list('title', flat=True)
-        return ', '.join(categories)
-
 
 class BookCheckOutModel(models.Model):
     book = models.ForeignKey('BookModel', on_delete=models.CASCADE)

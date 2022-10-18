@@ -5,6 +5,7 @@ from .models import (
     AuthorModel,
     BookCategory,
     BookModel,
+    BookCheckOutModel,
 )
 
 
@@ -38,4 +39,22 @@ class BookModelAdmin(admin.ModelAdmin):
         'title',
         'publisher',
         'publication_date',
+    )
+
+
+@admin.register(BookCheckOutModel)
+class BookCheckOutModelAdmin(admin.ModelAdmin):
+    list_display = (
+        'book',
+        'user_checkout',
+        'librarian',
+        'check_out_datetime',
+        'return_datetime',
+    )
+    search_fields = (
+        'book__title',
+        'book__publisher__first_name',
+        'book__publisher__last_name',
+        'user_checkout__user__first_name',
+        'user_checkout__user__last_name',
     )

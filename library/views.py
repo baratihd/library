@@ -29,6 +29,8 @@ class BookListView(ListView):
                     Q(category__title__icontains=cd) |
                     Q(authors__first_name__icontains=cd) |
                     Q(authors__last_name__icontains=cd) |
-                    Q(publisher__name__icontains=cd)
+                    Q(publisher__name__icontains=cd),
+                    bookcheckoutmodel__isnull=False,
+                    bookcheckoutmodel__return_datetime__isnull=True,
                 )
         return queryset

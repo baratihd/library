@@ -22,3 +22,10 @@ class LibrarianModel(models.Model):
         max_length=10, editable=False, unique=True, default=create_new_staff_number
     )
     address = models.ForeignKey('index.AddressModel', on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        is_created = not self.id
+        if is_created:
+            self.user.is_staff = True
+            self.user.save()
+        return super().save(args, kwargs)
